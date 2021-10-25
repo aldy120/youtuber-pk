@@ -1,6 +1,6 @@
 import logo from './ps/youtube-pk.png';
 import './App.css';
-import React, { Component } from 'react';
+import React from 'react';
 import Papa from 'papaparse'
 import Deque from "double-ended-queue";
 
@@ -68,10 +68,9 @@ class Game extends React.Component {
     competitors.push(target);
     console.log(target)
     console.log(competitors);
-    let updatedCompetitors =
-      this.setState({
-        competitors: competitors
-      })
+    this.setState({
+      competitors: competitors
+    })
   }
 
   render() {
@@ -125,7 +124,7 @@ class Game extends React.Component {
       return gamePage;
     }
 
-    
+
 
 
   }
@@ -136,7 +135,7 @@ function Square(props) {
   return (
     <div>
       <p>
-      <img src={url} className={props.className} onClick={() => props.onClick(props.target)}/>
+        <img alt='' src={url} className={props.className} onClick={() => props.onClick(props.target)} />
       </p>
     </div>
   );

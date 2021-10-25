@@ -99,7 +99,7 @@ class Game extends React.Component {
             <p>
               The winner
             </p>
-            <img src={`https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/images/${this.state.competitors.peekFront().ImageName}.jpeg`} />
+            <img alt='' src={`https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/images/${this.state.competitors.peekFront().ImageName}.jpeg`} />
           </header>
         </div>
       )

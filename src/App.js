@@ -71,6 +71,7 @@ class Game extends React.Component {
     this.setState({
       competitors: competitors
     })
+    window.scrollTo(0, 0)
   }
 
   render() {
@@ -123,10 +124,6 @@ class Game extends React.Component {
     if (this.state.game === 'ongoing') {
       return gamePage;
     }
-
-
-
-
   }
 }
 

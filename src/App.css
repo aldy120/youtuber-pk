@@ -48,11 +48,17 @@ button:hover {
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-.responsive {
+.beauty {
+  border-radius: 8px;
+  object-fit: cover;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
+.responsive {
+  width: 600px;
+  height: 600px;
+}
+
 .App-link {
   color: #61dafb;
 }

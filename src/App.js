@@ -21,7 +21,7 @@ class Game extends React.Component {
   }
 
   initializeCompetitors() {
-    let competitorsUrl = 'https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/tw-women-youtubers.csv'
+    let competitorsUrl = 'https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/data-csv/tw-women-youtubers.csv'
     this.getCompetitors(competitorsUrl);
   }
 
@@ -46,7 +46,7 @@ class Game extends React.Component {
       download: true,
       complete: function (results) {
         that.setState({
-          competitors: new Deque(results.data.slice(0, 2))
+          competitors: new Deque(results.data.slice(0, 16))
         });
       }
     });
@@ -71,11 +71,10 @@ class Game extends React.Component {
     this.setState({
       competitors: competitors
     })
-    window.scrollTo(0, 0)
   }
 
   render() {
-
+    window.scrollTo(0, 0)
     // Initial page
     let welcomePage = (
       <div className="App">
@@ -100,7 +99,7 @@ class Game extends React.Component {
             <p>
               The winner
             </p>
-            <img alt='' src={`https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/images/${this.state.competitors.peekFront().ImageName}.jpeg`} />
+            <img alt='' className='responsive beauty' src={`https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/images/${this.state.competitors.peekFront().ImageName}.jpeg`} />
           </header>
         </div>
       )
@@ -115,8 +114,8 @@ class Game extends React.Component {
           <p>
             Pick one you prefer.
           </p>
-          <Square target={left} className='left-image responsive' onClick={() => this.handleImageClick(left)} />
-          <Square target={right} className='right-image responsive' onClick={() => this.handleImageClick(right)} />
+          <Square target={left} className='left-image beauty' onClick={() => this.handleImageClick(left)} />
+          <Square target={right} className='right-image beauty' onClick={() => this.handleImageClick(right)} />
         </header>
       </div>
     );
@@ -132,7 +131,9 @@ function Square(props) {
   return (
     <div>
       <p>
-        <img alt='' src={url} className={props.className} onClick={() => props.onClick(props.target)} />
+        <div className="responsive">
+          <img alt='' src={url} className={props.className} onClick={() => props.onClick(props.target)} />
+        </div>
       </p>
     </div>
   );

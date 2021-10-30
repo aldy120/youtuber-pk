@@ -1,6 +1,4 @@
-.image-container {
-  margin: 40px;
-}
+
 
 button {
   background-color: #be3725; /* Green */
@@ -52,7 +50,6 @@ button:hover {
   color: white;
 }
 .beauty {
-  border-radius: 8px;
   object-fit: cover;
   width: 100%;
   height: 100%;
@@ -60,6 +57,19 @@ button:hover {
 .responsive {
   width: 600px;
   height: 600px;
+  margin: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .responsive {
+    width: 100vw;
+    height: 600px;
+    margin: 40px 0;
+    border-radius: 0;
+    overflow: hidden;
+  }
 }
 
 .App-link {

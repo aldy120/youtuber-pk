@@ -130,11 +130,9 @@ function Square(props) {
   let url = `https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/images/${props.target.ImageName}.jpeg`
   return (
     <div>
-      <p>
-        <div className="responsive">
-          <img alt='' src={url} className={props.className} onClick={() => props.onClick(props.target)} />
-        </div>
-      </p>
+      <div className="responsive image-container">
+        <img alt='' src={url} className={props.className} onClick={() => props.onClick(props.target)} />
+      </div>
     </div>
   );
 }

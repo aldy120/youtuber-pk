@@ -127,7 +127,7 @@ class Game extends React.Component {
 }
 
 function Square(props) {
-  let url = `https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/images/${props.target.ImageName}.jpeg`
+  let url = `https://youtuber-pk-images.lichi-chen.com/images/${props.target.ImageName}.jpeg`
   return (
     <div>
       <div className="responsive">

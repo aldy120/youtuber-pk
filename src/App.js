@@ -16,7 +16,8 @@ class Game extends React.Component {
     super(props);
     this.state = {
       game: 'start',
-      competitors: []
+      competitors: [],
+      clickable: true
     };
   }
 
@@ -28,12 +29,23 @@ class Game extends React.Component {
 
   componentDidMount() {
     this.initializeCompetitors();
-
   }
 
+  lockScreen() {
+    this.setState({
+      clickable: false
+    })
+  }
 
-  handleClick(i) {
-    console.log(this.state)
+  unlockScreen() {
+    console.log('unlockScreen')
+    console.log(this)
+    this.setState({
+      clickable: true
+    })
+  }
+
+  handleStartButtonClick(i) {
     this.setState({
       game: 'ongoing'
     });
@@ -59,17 +71,15 @@ class Game extends React.Component {
   }
 
   handleImageClick(target) {
+    this.lockScreen()
     // Update competitor states.
-    // Need current states
-    // Need current image index (left or right)
     let competitors = new Deque(this.state.competitors.toArray());
     competitors.shift();
     competitors.shift();
     competitors.push(target);
     console.log(target)
-    console.log(competitors);
     this.setState({
-      competitors: competitors
+      competitors: competitors,
     })
   }
 
@@ -81,7 +91,7 @@ class Game extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Click <button onClick={() => this.handleClick()} type="button">Start!</button> to choose your favorite YouTuber.
+            Click <button onClick={() => this.handleStartButtonClick()} type="button">Start!</button> to choose your favorite YouTuber.
           </p>
         </header>
       </div>
@@ -105,7 +115,7 @@ class Game extends React.Component {
       )
       return endPage
     }
-
+    
     // Game started
     let { left, right } = this.getLeftAndRight()
     let gamePage = (
@@ -114,8 +124,8 @@ class Game extends React.Component {
           <p>
             Pick one you prefer.
           </p>
-          <Square target={left} className='left-image beauty' onClick={() => this.handleImageClick(left)} />
-          <Square target={right} className='right-image beauty' onClick={() => this.handleImageClick(right)} />
+          <Square handleUnlockScreen={() => this.unlockScreen()} clickable={this.state.clickable} target={left} className='left-image beauty' onClick={() => this.handleImageClick(left)} />
+          <Square handleUnlockScreen={() => this.unlockScreen()} clickable={this.state.clickable} target={right} className='right-image beauty' onClick={() => this.handleImageClick(right)} />
         </header>
       </div>
     );
@@ -127,11 +137,23 @@ class Game extends React.Component {
 }
 
 function Square(props) {
+  console.log(props.clickable)
   let url = `https://youtuber-pk-images.lichi-chen.com/images/${props.target.ImageName}.jpeg`
+  let handleClick = () => {
+    if (props.clickable === false) {
+      return
+    }
+    props.onClick(props.target)
+  }
+  let handleImageLoad = () => {
+    console.log('handleImageLoad')
+    props.handleUnlockScreen()
+  }
+  const loading = props.clickable? '' : ' loading'
   return (
     <div>
       <div className="responsive">
-        <img alt='' src={url} className={props.className} onClick={() => props.onClick(props.target)} />
+        <img alt='' src={url} className={props.className + loading} onClick={handleClick} onLoad={handleImageLoad} />
       </div>
     </div>
   );

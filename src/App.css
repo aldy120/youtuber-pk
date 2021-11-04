@@ -62,6 +62,10 @@ button:hover {
   overflow: hidden;
 }
 
+.loading {
+  opacity: 0.3;
+}
+
 @media screen and (max-width: 600px) {
   .responsive {
     width: 100vw;

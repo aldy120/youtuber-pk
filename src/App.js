@@ -53,15 +53,27 @@ class Game extends React.Component {
 
   getCompetitors(fileInputName) {
     let that = this;
+    let shuffle = this.shuffle;
     Papa.parse(fileInputName, {
       header: true,
       download: true,
       complete: function (results) {
         that.setState({
-          competitors: new Deque(results.data.slice(0, 16))
+          competitors: new Deque(shuffle(results.data.slice(0, 16)))
         });
       }
     });
+  }
+
+  shuffle(array) {
+    var m = array.length, t, i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+    return array
   }
 
   getLeftAndRight() {

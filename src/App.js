@@ -3,6 +3,7 @@ import './App.css';
 import React from 'react';
 import Papa from 'papaparse'
 import Deque from "double-ended-queue";
+const imageSourceUrl = 'https://youtuber-pk-images.lichi-chen.com'
 
 
 function App() {
@@ -121,7 +122,7 @@ class Game extends React.Component {
             <p>
               The winner
             </p>
-            <img alt='' className='responsive beauty' src={`https://youtuber-pk-nrt.s3.ap-northeast-1.amazonaws.com/images/${this.state.competitors.peekFront().ImageName}.jpeg`} />
+            <img alt='' className='responsive beauty' src={`${imageSourceUrl}/images/${this.state.competitors.peekFront().ImageName}.jpeg`} />
           </header>
         </div>
       )
@@ -150,7 +151,7 @@ class Game extends React.Component {
 
 function Square(props) {
   console.log(props.clickable)
-  let url = `https://youtuber-pk-images.lichi-chen.com/images/${props.target.ImageName}.jpeg`
+  let url = `${imageSourceUrl}/images/${props.target.ImageName}.jpeg`
   let handleClick = () => {
     if (props.clickable === false) {
       return

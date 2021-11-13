@@ -18,7 +18,9 @@ class Game extends React.Component {
     this.state = {
       game: 'start',
       competitors: [],
-      clickable: true
+      // clickable: true,
+      clickableLeft: false,
+      clickableRight: false
     };
   }
 
@@ -32,17 +34,27 @@ class Game extends React.Component {
     this.initializeCompetitors();
   }
 
-  lockScreen() {
+  lockScreenLeft() {
     this.setState({
-      clickable: false
+      clickableLeft: false
+    })
+  }
+  
+  lockScreenRight() {
+    this.setState({
+      clickableRight: false
     })
   }
 
-  unlockScreen() {
-    console.log('unlockScreen')
-    console.log(this)
+  unlockScreenLeft() {
     this.setState({
-      clickable: true
+      clickableLeft: true
+    })
+  }
+  
+  unlockScreenRight() {
+    this.setState({
+      clickableRight: true
     })
   }
 
@@ -79,12 +91,15 @@ class Game extends React.Component {
 
   getLeftAndRight() {
     let competitors = new Deque(this.state.competitors.toArray())
+    console.log(competitors)
     let [left, right] = [competitors.shift(), competitors.shift()];
+    console.log({ left, right })
     return { left, right }
   }
 
   handleImageClick(target) {
-    this.lockScreen()
+    this.lockScreenLeft()
+    this.lockScreenRight()
     // Update competitor states.
     let competitors = new Deque(this.state.competitors.toArray());
     competitors.shift();
@@ -97,7 +112,7 @@ class Game extends React.Component {
   }
 
   render() {
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
     // Initial page
     let welcomePage = (
       <div className="App">
@@ -137,8 +152,8 @@ class Game extends React.Component {
           <p>
             Pick one you prefer.
           </p>
-          <Square handleUnlockScreen={() => this.unlockScreen()} clickable={this.state.clickable} target={left} className='left-image beauty' onClick={() => this.handleImageClick(left)} />
-          <Square handleUnlockScreen={() => this.unlockScreen()} clickable={this.state.clickable} target={right} className='right-image beauty' onClick={() => this.handleImageClick(right)} />
+          <Square handleUnlockScreen={() => this.unlockScreenLeft()} clickable={this.state.clickableLeft} target={left} className='left-image beauty' onClick={() => this.handleImageClick(left)} />
+          <Square handleUnlockScreen={() => this.unlockScreenRight()} clickable={this.state.clickableRight} target={right} className='right-image beauty' onClick={() => this.handleImageClick(right)} />
         </header>
       </div>
     );
@@ -150,7 +165,6 @@ class Game extends React.Component {
 }
 
 function Square(props) {
-  console.log(props.clickable)
   let url = `${imageSourceUrl}/images/${props.target.ImageName}.jpeg`
   let handleClick = () => {
     if (props.clickable === false) {
@@ -159,8 +173,8 @@ function Square(props) {
     props.onClick(props.target)
   }
   let handleImageLoad = () => {
-    console.log('handleImageLoad')
     props.handleUnlockScreen()
+    window.scrollTo(0, 0)
   }
   const loading = props.clickable? '' : ' loading'
   return (
@@ -171,6 +185,5 @@ function Square(props) {
     </div>
   );
 }
-
 
 export default App;

@@ -137,13 +137,16 @@ class Game extends React.Component {
 
     // Game end
     if (this.state.competitors.length === 1) {
+      const winner = this.state.competitors.peekFront()
       let endPage = (
         <div className="App">
           <header className="App-header">
             <p>
-              The winner
+              Winner: {winner.DisplayName}
             </p>
-            <img alt='' className='responsive beauty' src={`${imageSourceUrl}/images/${this.state.competitors.peekFront().ImageName}.jpeg`} />
+            <a target="_blank" href={winner.ChannelLink}>
+            <img alt='' className='responsive beauty' src={`${imageSourceUrl}/images/${winner.ImageName}.jpeg`} />
+            </a>
           </header>
         </div>
       )

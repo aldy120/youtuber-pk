@@ -53,7 +53,6 @@ class Game extends React.Component {
   }
   
   unlockScreenRight() {
-    console.log('unlockScreenRight')
     this.setState({
       clickableRight: true
     })
@@ -72,8 +71,10 @@ class Game extends React.Component {
       header: true,
       download: true,
       complete: function (results) {
+        const result = results.data.slice(0, 30)
+        const competitors = new Deque(shuffle(result).slice(0, 16))
         that.setState({
-          competitors: new Deque(shuffle(results.data.slice(0, 16)))
+          competitors: competitors
         });
       }
     });
@@ -92,18 +93,16 @@ class Game extends React.Component {
 
   getLeftAndRight() {
     let competitors = new Deque(this.state.competitors.toArray())
-    console.log(competitors)
     let [left, right] = [competitors.shift(), competitors.shift()];
-    console.log({ left, right })
     return { left, right }
   }
 
   handleImageClick(target) {
     // If the last-second round we choose right, the unlock in onLoad event won't trigger
     // Because the DOM doesn't update
-    if (this.state.competitors.length === 3) {
-      this.lockScreenLeft()
-      this.lockScreenRight()
+    if (this.state.competitors.length !== 3) {
+    this.lockScreenLeft()
+    this.lockScreenRight()
     }
     // Update competitor states.
     let competitors = new Deque(this.state.competitors.toArray());

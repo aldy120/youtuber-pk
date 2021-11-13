@@ -53,6 +53,7 @@ class Game extends React.Component {
   }
   
   unlockScreenRight() {
+    console.log('unlockScreenRight')
     this.setState({
       clickableRight: true
     })
@@ -98,10 +99,15 @@ class Game extends React.Component {
   }
 
   handleImageClick(target) {
-    this.lockScreenLeft()
-    this.lockScreenRight()
+    // If the last-second round we choose right, the unlock in onLoad event won't trigger
+    // Because the DOM doesn't update
+    if (this.state.competitors.length === 3) {
+      this.lockScreenLeft()
+      this.lockScreenRight()
+    }
     // Update competitor states.
     let competitors = new Deque(this.state.competitors.toArray());
+    
     competitors.shift();
     competitors.shift();
     competitors.push(target);

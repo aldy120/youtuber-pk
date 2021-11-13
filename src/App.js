@@ -73,6 +73,7 @@ class Game extends React.Component {
       complete: function (results) {
         const result = results.data.slice(0, 30)
         const competitors = new Deque(shuffle(result).slice(0, 16))
+        console.log(competitors)
         that.setState({
           competitors: competitors
         });

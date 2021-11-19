@@ -144,7 +144,7 @@ class Game extends React.Component {
             <p>
               Winner: {winner.DisplayName}
             </p>
-            <a target="_blank" href={winner.ChannelLink}>
+            <a target="_blank" rel="noreferrer" href={winner.ChannelLink}>
             <img alt='' className='responsive beauty' src={`${imageSourceUrl}/images/${winner.ImageName}.jpeg`} />
             </a>
           </header>

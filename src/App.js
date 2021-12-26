@@ -1,10 +1,11 @@
-import logo from './ps/youtube-pk.png';
+import logoPng from './ps/youtube-pk.png';
+import logoAvif from './ps/youtube-pk.avif';
+import logoWebp from './ps/youtube-pk.webp';
 import './App.css';
 import React from 'react';
 import Papa from 'papaparse'
 import Deque from "double-ended-queue";
 const imageSourceUrl = 'https://youtuber-pk-images.lichi-chen.com'
-
 
 function App() {
   return (
@@ -39,7 +40,7 @@ class Game extends React.Component {
       clickableLeft: false
     })
   }
-  
+
   lockScreenRight() {
     this.setState({
       clickableRight: false
@@ -51,7 +52,7 @@ class Game extends React.Component {
       clickableLeft: true
     })
   }
-  
+
   unlockScreenRight() {
     this.setState({
       clickableRight: true
@@ -102,12 +103,12 @@ class Game extends React.Component {
     // If the last-second round we choose right, the unlock in onLoad event won't trigger
     // Because the DOM doesn't update
     if (this.state.competitors.length !== 3) {
-    this.lockScreenLeft()
-    this.lockScreenRight()
+      this.lockScreenLeft()
+      this.lockScreenRight()
     }
     // Update competitor states.
     let competitors = new Deque(this.state.competitors.toArray());
-    
+
     competitors.shift();
     competitors.shift();
     competitors.push(target);
@@ -123,7 +124,11 @@ class Game extends React.Component {
     let welcomePage = (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <picture>
+            <source srcset={logoWebp} type="image/webp" />
+            <source srcset={logoAvif} type="image/avif" />
+            <img src="logoPng.png" alt="logo" />
+          </picture>
           <p>
             Click <button onClick={() => this.handleStartButtonClick()} type="button">Start!</button> to choose your favorite YouTuber.
           </p>
@@ -145,14 +150,14 @@ class Game extends React.Component {
               Winner: {winner.DisplayName}
             </p>
             <a target="_blank" rel="noreferrer" href={winner.ChannelLink}>
-            <img alt='' className='responsive beauty' src={`${imageSourceUrl}/images/${winner.ImageName}.jpeg`} />
+              <img alt='' className='responsive beauty' src={`${imageSourceUrl}/images/${winner.ImageName}.jpeg`} />
             </a>
           </header>
         </div>
       )
       return endPage
     }
-    
+
     // Game started
     let { left, right } = this.getLeftAndRight()
     let gamePage = (
@@ -185,7 +190,7 @@ function Square(props) {
     props.handleUnlockScreen()
     window.scrollTo(0, 0)
   }
-  const loading = props.clickable? '' : ' loading'
+  const loading = props.clickable ? '' : ' loading'
   return (
     <div>
       <div className="responsive">

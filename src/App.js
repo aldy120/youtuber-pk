@@ -1,4 +1,3 @@
-import logoPng from './ps/youtube-pk.png';
 import logoAvif from './ps/youtube-pk.avif';
 import logoWebp from './ps/youtube-pk.webp';
 import './App.css';

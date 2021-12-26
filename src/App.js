@@ -1,3 +1,4 @@
+import logoPng from './ps/youtube-pk.png';
 import logoAvif from './ps/youtube-pk.avif';
 import logoWebp from './ps/youtube-pk.webp';
 import './App.css';
@@ -124,9 +125,9 @@ class Game extends React.Component {
       <div className="App">
         <header className="App-header">
           <picture>
-            <source srcset={logoWebp} type="image/webp" />
-            <source srcset={logoAvif} type="image/avif" />
-            <img src="logoPng.png" alt="logo" />
+            <source className="App-logo" srcset={logoWebp} type="image/webp" />
+            <source className="App-logo" srcset={logoAvif} type="image/avif" />
+            <img className="App-logo" src={logoPng} alt="logo" />
           </picture>
           <p>
             Click <button onClick={() => this.handleStartButtonClick()} type="button">Start!</button> to choose your favorite YouTuber.

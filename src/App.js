@@ -71,7 +71,7 @@ class Game extends React.Component {
       header: true,
       download: true,
       complete: function (results) {
-        const result = results.data.slice(0, 30)
+        const result = results.data
         const competitors = new Deque(shuffle(result).slice(0, 16))
         console.log(competitors)
         that.setState({

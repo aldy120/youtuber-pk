@@ -1,3 +1,6 @@
+想認識更多的優質 YouTuber 嗎? 歡迎到 YouTuber PK 探索你的喜歡的 YouTuber 。
+https://youtuber-pk.lichi-chen.com/
+
 # YouTuber PK
 從資料集中隨機選擇 16 位 YouTubers 進行淘汰賽。每次進行二選一，未被選中者淘汰。直到最後一人。
 

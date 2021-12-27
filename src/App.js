@@ -143,6 +143,8 @@ class Game extends React.Component {
     // Game end
     if (this.state.competitors.length === 1) {
       const winner = this.state.competitors.peekFront()
+      const metricsEndpoint = 'https://youtuber-pk-metrics.lichi-chen.com/'
+      const metricsUrl = metricsEndpoint + JSON.stringify(winner)
       let endPage = (
         <div className="App">
           <header className="App-header">
@@ -152,6 +154,7 @@ class Game extends React.Component {
             <a target="_blank" rel="noreferrer" href={winner.ChannelLink}>
               <img alt='' className='responsive beauty' src={`${imageSourceUrl}/images/${winner.ImageName}.jpeg`} />
             </a>
+            <img src={metricsUrl} alt="send metrics" />
           </header>
         </div>
       )
@@ -194,6 +197,7 @@ function Square(props) {
   return (
     <div>
       <div className="responsive">
+        <div>{props.target.DisplayName}</div>
         <img alt='' src={url} className={props.className + loading} onClick={handleClick} onLoad={handleImageLoad} />
       </div>
     </div>
